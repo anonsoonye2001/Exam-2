@@ -4,9 +4,9 @@ library(nutshell)
 library(tidyverse)
 load(file="test2_data_rev.Rdata")
 t2
+s=t2$date_chr
+date=s
 library("stringr")
-date<-scan(file="test2_data_rev.Rdata",
-           what="character",skip=1, nlines=1, quiet= TRUE)
 
 mm<-str_sub(string=date, start=1,end=2)
 mm
@@ -15,12 +15,14 @@ dd<-str_sub(date,4,5)
 dd
 dd<-as.numeric(dd)
 typeof(dd)
-yy<-str_sub(date,7,8)
+yy<-str_sub(date,7,10)
 yy
 
-date<-str_c(mm,dd,yy,sep="/")
+date2<-str_c(mm,dd,yy,sep="/")
+date2=as.character(date2)
+date2
 
-d$dateTime<-str_c(d$date, d$time, sep=" ")
+t2$date<-str_c(d$date, sep="/")
 d$dateTime
 d$dateTime2<-as.POSIXct(strptime(x=d$dateTime, format="%m/%d/%y %H:%M:%OS", tz="America/New_York"))
 head(d)
@@ -57,9 +59,32 @@ library(tidyverse)
 c4<-read_csv(file="aurelia_15minCell_statareas.txt")
 head(c4)            
 
-load(file="aurelia_15minCell_statareas.Rdata")
-d=file
-d<- f[f$aurelia_15minCell_statareas.Rdata=="2012",]
+
+r=c4[c4$year=="2012",]
+r
+subset.2012=subset(r=c4, year=="2012")
+save(subset.2012,file="aurelia_data.Rdata2")
+
+load(file="test2_deep.Rdata")
+load("test2_mid.Rdata")
+load("test2_shallow.Rdata")
+df.shallow=as.data.frame(shallow)
+df.mid=as.data.frame(mid)
+df.deep=as.data.frame(deep)
+bind=rbind(df.shallow,df.deep,df.mid)
+bind
+
+load(file="t2-1.Rdata")
+load(file="t2-2.Rdata")
+
+df.t2.1=as.data.frame(t2)
+df.t2.2=as.data.frame(t2.1)
+
+join=full_join(df.t2.1,df.t2.2,by="parcel.id")
+join
+
+merge=merge(df.t2.1,df.t2.2,by="parcel.id")
+merge
 
 
 data("batting.2008")
