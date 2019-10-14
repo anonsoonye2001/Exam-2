@@ -62,7 +62,7 @@ head(c4)
 
 r=c4[c4$year=="2012",]
 r
-subset.2012=subset(r=c4, year=="2012")
+subset.2012=subset(c4, year=="2012")
 save(subset.2012,file="aurelia_data.Rdata2")
 
 load(file="test2_deep.Rdata")
@@ -103,6 +103,7 @@ team.sum=d%>%group_by(teamID)%>%summarise(HRsum=sum(HR),HRmean=mean(HR),
 team.sum
 
 
+library(reshape2)
 load("t2-1.Rdata")
 t2.1
 t2.1.melt<-melt(data=t2.1,id.vars = c("transect","parcel.id"),measure.var=c("group"))
