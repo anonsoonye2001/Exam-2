@@ -22,10 +22,10 @@ date2<-str_c(mm,dd,yy,sep="/")
 date2=as.character(date2)
 date2
 
-t2$date<-str_c(d$date, sep="/")
-d$dateTime
-d$dateTime2<-as.POSIXct(strptime(x=d$dateTime, format="%m/%d/%y %H:%M:%OS", tz="America/New_York"))
-head(d)
+t2$date<-str_c(t2$date, sep="/")
+t2$date
+t2$date<-as.POSIXct(strptime(x=t2$date, format="%m/%d/%y", tz="America/New_York"))
+head(t2)
 
 
 
@@ -101,6 +101,7 @@ team.sum1
 team.sum=d%>%group_by(teamID)%>%summarise(HRsum=sum(HR),HRmean=mean(HR),
                                           HRsd=sd(HR),ABcount=n())
 team.sum
+
 
 load("t2-1.Rdata")
 t2.1
